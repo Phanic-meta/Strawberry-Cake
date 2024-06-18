@@ -25,6 +25,7 @@ async def on_ready():
     name="create",
     description="Create a new Message for Reaction Rolles",
 )
+@app_commands.checks.has_permissions(administrator=True)
 async def create(interaction: discord.Interaction, content: str):
     await interaction.response.send_message(content="Reaction Rolles created", ephemeral=True)
     await interaction.channel.send(content)
@@ -34,6 +35,7 @@ async def create(interaction: discord.Interaction, content: str):
     name="add",
     description="Add Reaction Rolles",
 )
+@app_commands.checks.has_permissions(administrator=True)
 async def add(interaction: discord.Interaction, emoji: str, message_id: str):
     rMessage = await interaction.channel.fetch_message(message_id)
     if rMessage.author != client.user:
@@ -52,6 +54,7 @@ async def emoji_autocomplete(interaction: discord.Interaction, current: str) -> 
     name="remove",
     description="Remove Reaction Rolles",
 )
+@app_commands.checks.has_permissions(administrator=True)
 async def remove(interaction: discord.Interaction, emoji: str, message_id: str):
     rMessage = await interaction.channel.fetch_message(message_id)
     if rMessage.author != client.user:
