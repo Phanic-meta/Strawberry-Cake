@@ -24,7 +24,6 @@ async def on_ready():
 @tree.command(
     name="create",
     description="Create a new Message for Reaction Rolles",
-    guild=discord.Object(id=774628400043524107)
 )
 async def create(interaction: discord.Interaction, content: str):
     await interaction.response.send_message(content="Reaction Rolles created", ephemeral=True)
@@ -34,7 +33,6 @@ async def create(interaction: discord.Interaction, content: str):
 @tree.command(
     name="add",
     description="Add Reaction Rolles",
-    guild=discord.Object(id=774628400043524107)
 )
 async def add(interaction: discord.Interaction, emoji: str, message_id: str):
     rMessage = await interaction.channel.fetch_message(message_id)
@@ -53,7 +51,6 @@ async def emoji_autocomplete(interaction: discord.Interaction, current: str) -> 
 @tree.command(
     name="remove",
     description="Remove Reaction Rolles",
-    guild=discord.Object(id=774628400043524107)
 )
 async def remove(interaction: discord.Interaction, emoji: str, message_id: str):
     rMessage = await interaction.channel.fetch_message(message_id)
@@ -77,6 +74,8 @@ async def on_raw_reaction_add(rawreactionactionevent):
         if not reaction.me:
             await reaction.clear()
     if message.author.id != client.user.id:
+        return
+    if rawreactionactionevent.member.id == client.user.id:
         return
     roles = await message.guild.fetch_roles()
     for role in roles:
@@ -109,8 +108,8 @@ async def on_message(message):
 
     match message.content.split(" ")[0]:
         case '--sync':
-            await tree.sync(guild=discord.Object(id=message.guild.id))
-            await message.reply(content=f'sync on {message.guild.id}')
+            await tree.sync()
+            await message.reply("All have been synced")
 
 
 client.run(TOKEN)
