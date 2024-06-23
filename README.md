@@ -1,5 +1,5 @@
 # Fluffy Cake
-A light weight reaction Bot 
+A small reaction Bot 
 
-need costum emojis and a coresponding role
+need costum emojis and a coresponding role on the discord server
 the emoji and role **must have** matching names to work
