@@ -2,4 +2,4 @@
 A small reaction Bot 
 
 need costum emojis and a coresponding role on the discord server
-the emoji and role **must have** matching names to work
+the emoji and role **must have** same names to work
